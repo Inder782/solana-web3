@@ -17,12 +17,12 @@ export async function GET(request: Request) {
             actions: [
                 {
                     label:"Vote for God of war",
-                    href : "api/vote?candidate=God of war",
+                    href : "http://localhost:3000/api/vote?candidate=God of war",
                     type: "external-link"
                 },
                 {
                     label:"Vote for GTA5",
-                    href : "api/vote?candidate=GTA5",
+                    href : "http://localhost:3000/api/vote?candidate=GTA5",
                     type: "external-link"
                 }
             ]
@@ -35,13 +35,13 @@ export async function POST (request: Request){
    
     const url = new URL(request.url);
     const candidate = url.searchParams.get("candidate");
-
+    console.log(candidate)
     if (candidate !="God of war"  && candidate != "GTA5")
     {
         return new Response("Invalid candidate,",{status:400, headers:ACTIONS_CORS_HEADERS});
     }
 
-    const connection = new Connection("https://127.0.0.1:8899","confirmed");
+    const connection = new Connection("http://127.0.0.1:8899","confirmed");
 
     const program:Program<Voting>= new Program(IDL,{connection});
 
@@ -61,14 +61,14 @@ export async function POST (request: Request){
     
     const blockhash= await connection.getLatestBlockhash();
 
-    const transaction = new Transaction({feePayer:voter,
+    const tx = new Transaction({feePayer:voter,
         blockhash:blockhash.blockhash,
         lastValidBlockHeight:blockhash.lastValidBlockHeight})
         .add(instruction)
 
     const response = await createPostResponse({
         fields: {
-            transaction: transaction
+            transaction: tx
         }
     })
     return Response.json(response,{headers:ACTIONS_CORS_HEADERS});
