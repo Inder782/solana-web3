@@ -15,7 +15,10 @@ declare_id!("25uoZzo8hyQ9vzsDd2KwdoKkvqSCB6FTsfSfgNwrhuC1");
 pub mod swap {
     use super::*;
 
-    pub fn initialize(ctx: Context<Initialize>) -> Result<()> {
-        initialize::handler(ctx)
+    pub fn make_offer(ctx: Context<MakeOffer>,id:u64,token_a_offered_amt:u64,token_b_offered_amt:u64) -> Result<()> {
+        
+        instructions::make_offer::send_offered_tokens_to_vault(&ctx,token_a_offered_amt)?;
+
+        instructions::make_offer::save_offer(&ctx,id,token_b_offered_amt)
     }
 }
