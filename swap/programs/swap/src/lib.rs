@@ -19,6 +19,6 @@ pub mod swap {
         
         instructions::make_offer::send_offered_tokens_to_vault(&ctx,token_a_offered_amt)?;
 
-        instructions::make_offer::save_offer(&ctx,id,token_b_offered_amt)
+        instructions::make_offer::save_offer(ctx,id,token_b_offered_amt)
     }
 }
