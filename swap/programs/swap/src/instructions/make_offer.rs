@@ -63,8 +63,9 @@ pub fn send_offered_tokens_to_vault(ctx: &Context<MakeOffer>,token_a_offered_amo
     
 }
 
-pub fn save_offer(ctx: &Context<MakeOffer>,id: u64,token_b_wanted:u64)->Result<()>{
-    ctx.accounts.offer.set_inner(Offer{
+pub fn save_offer(ctx: Context<MakeOffer>,id: u64,token_b_wanted:u64)->Result<()>{
+    ctx.accounts.offer.set_inner(Offer
+        {
         id,
         maker:ctx.accounts.maker.key(),
         token_mint_a: ctx.accounts.token_mint_a.key(),
@@ -72,4 +73,6 @@ pub fn save_offer(ctx: &Context<MakeOffer>,id: u64,token_b_wanted:u64)->Result<(
         token_b_wanted,
         bump:ctx.bumps.offer,
     });
+    Ok(())
+
 }

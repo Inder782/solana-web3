@@ -1,5 +1,6 @@
 use anchor_lang::prelude::*;
-use anchor_spl::{token::{transfer_checked, Mint, TransferChecked}, token_interface::{TokenAccount, TokenInterface}};
+use anchor_spl::{token::{transfer_checked, TransferChecked}, token_interface::{TokenAccount, TokenInterface}};
+use anchor_spl::token_interface::Mint;
 
 pub fn transfer_token<'info>(
     from:&InterfaceAccount<'info,TokenAccount>,
