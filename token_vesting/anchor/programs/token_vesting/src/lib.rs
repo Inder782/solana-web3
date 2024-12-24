@@ -1,13 +1,15 @@
 #![allow(clippy::result_large_err)]
 
 use anchor_lang::prelude::*;
-use anchor_spl::{associated_token::AssociatedToken, token::{Mint, TokenAccount}, token_interface::TokenInterface};
+use anchor_spl::associated_token::AssociatedToken;
+use anchor_spl::token_interface::{ self, Mint, TokenAccount, TokenInterface, TransferChecked };
+
 
 declare_id!("coUnmi3oBUtwtd9fjeAvSsJssXh5A5xyPbhpewyzRVF");
 
 #[program]
 pub mod token_vesting {
-    use anchor_spl::{token::TransferChecked, token_interface};
+    use anchor_spl::token_2022::TransferChecked;
 
     use super::*;
 
