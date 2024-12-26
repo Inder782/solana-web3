@@ -197,24 +197,22 @@ pub struct CreateEmployeeAccount<'info>{
   pub employee_account : Account<'info,EmployeeAccount>,
   pub system_program: Program<'info,System> 
 }
+
 #[account]
-#[derive(InitSpace)]
+#[derive(InitSpace)] // derive it's space
 pub struct VestingAccount{
   pub owner: Pubkey,
   pub mint: Pubkey,
   pub treasury_token_account: Pubkey,
   
   #[max_len(50)]
-  
   pub company_name:String,
   pub treasury_bump:u8,
   pub bump: u8
-  
 }
 
-#[account]
+#[account] 
 #[derive(InitSpace)]
-
 pub struct EmployeeAccount{
   pub beneficiary : Pubkey,
   pub start_time: i64,
@@ -228,13 +226,16 @@ pub struct EmployeeAccount{
 
 #[error_code]
 pub enum ErrorCode {
+
   #[msg("Claim not available yet")]
   ClaimNotAvailableYet,
 
   #[msg("Invalid Vesting Period! ")]
   InvalidVestingPeriod,
+  
   #[msg("Calculation Error")]
   CalculationOverflow,
+  
   #[msg("Nothing To Claim !!")]
   NothingToClaim
 
